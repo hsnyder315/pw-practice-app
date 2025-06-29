@@ -20,36 +20,6 @@ test.beforeEach(async({page}) => {
     await page.getByText('Form Layouts').click() // Section 4 Lesson 24
 })
 
-// Section 4 Lesson 24:Locator Syntax Rules
-test('Locator syntax rule', async({page})=> {
-    // by Tag name ('')
-    await page.locator('input').first().click() // will find all elements with the Tag 'input'.
-
-    // by ID: ('#')
-    page.locator('#inputEmail1') // will find all elements with the ID 'inputEmail'. The # tells the test to look for an ID
-
-    // by Class Value: ('.')
-    page.locator('.shape-rectangle') // will find all elements with the Class 'shape-rectanle'. The . tells the test to look for this text in the Class
-
-    // by Full Class Value: ('[]')
-    page.locator('[class="input-full-width size-medium status-basic shape-rectangle nb-transition"]') // will find all elements with the full class value. The [] tells the test to look for any classes with the same full value.
-
-    // by attribute: ('[]')
-    page.locator('[placeholder="Email"]') // will find all elements with the attribute 'placeholder="Email"'. The [] tells the test to look for this text in any attributes
-
-    // Combine different selectors
-    page.locator('input[placeholder="Email"][nbinput]') // will find all elements with both the nbinput and plaholder="Email" values
-
-    // by XPath (NOT RECOMMENDED)
-    page.locator('//*[@id="inputEmail"]')
-
-    // by partial text match
-    page.locator(':text("Using")') 
-
-    // by exact match
-    page.locator(':text-is("Using the Grid")')
-})
-
 // when creating tests with repeating code, use Hooks
 // hooks are: test.beforeAll, test.beforeEach, test.afterAll, test.afterEach
 // avoid using afterEach and afterAll as much as possible to improve stability and performance
@@ -83,3 +53,55 @@ test('Locator syntax rule', async({page})=> {
         // await page.getByText('Datepicker').click()
     // })
 // })
+
+// Section 4 Lesson 24:Locator Syntax Rules
+test('Locator syntax rule', async({page})=> {
+    // by Tag name ('')
+    await page.locator('input').first().click() // will find all elements with the Tag 'input'.
+
+    // by ID: ('#')
+    page.locator('#inputEmail1') // will find all elements with the ID 'inputEmail'. The # tells the test to look for an ID
+
+    // by Class Value: ('.')
+    page.locator('.shape-rectangle') // will find all elements with the Class 'shape-rectanle'. The . tells the test to look for this text in the Class
+
+    // by Full Class Value: ('[]')
+    page.locator('[class="input-full-width size-medium status-basic shape-rectangle nb-transition"]') // will find all elements with the full class value. The [] tells the test to look for any classes with the same full value.
+
+    // by attribute: ('[]')
+    page.locator('[placeholder="Email"]') // will find all elements with the attribute 'placeholder="Email"'. The [] tells the test to look for this text in any attributes
+
+    // Combine different selectors
+    page.locator('input[placeholder="Email"][nbinput]') // will find all elements with both the nbinput and plaholder="Email" values
+
+    // by XPath (NOT RECOMMENDED)
+    page.locator('//*[@id="inputEmail"]')
+
+    // by partial text match
+    page.locator(':text("Using")') 
+
+    // by exact match
+    page.locator(':text-is("Using the Grid")')
+})
+
+// Section 4 Lesson 25: Locator Syntax Rules
+test('User facing locators', async({page}) => {
+    // getByRole - typically the first get call to try for running tests
+    await page.getByRole('textbox', {name: "Email"}).first().click() // using .first() in this manner tells Playwright to select only the first Email textbox available on the page
+    await page.getByRole('button', {name: "Sign in"}).first().click() // using .first() here tells Playwright to select only the first Sign In button
+
+    // getByLabel
+    await page.getByLabel('Email').first().click()
+
+    // getByPlaceholder
+    await page.getByPlaceholder('Jane Doe').click()
+
+    // getByText
+    await page.getByText('Using the Grid').click()
+
+    // getByTestId
+    await page.getByTestId('SignIn').click()
+
+    //getByTitle
+    await page.getByTitle('IoT Dashboard').click()
+})
