@@ -16,37 +16,70 @@ import {test} from '@playwright/test'
 
 test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/') // when using await function, always set the function to async as seen here or there will be an error
+    await page.getByText('Forms').click() // Section 4 Lesson 24
+    await page.getByText('Form Layouts').click() // Section 4 Lesson 24
 })
 
-// when creating tests with repeating code, use Hooks (see line 17)
+// Section 4 Lesson 24:Locator Syntax Rules
+test('Locator syntax rule', async({page})=> {
+    // by Tag name ('')
+    await page.locator('input').first().click() // will find all elements with the Tag 'input'.
+
+    // by ID: ('#')
+    page.locator('#inputEmail1') // will find all elements with the ID 'inputEmail'. The # tells the test to look for an ID
+
+    // by Class Value: ('.')
+    page.locator('.shape-rectangle') // will find all elements with the Class 'shape-rectanle'. The . tells the test to look for this text in the Class
+
+    // by Full Class Value: ('[]')
+    page.locator('[class="input-full-width size-medium status-basic shape-rectangle nb-transition"]') // will find all elements with the full class value. The [] tells the test to look for any classes with the same full value.
+
+    // by attribute: ('[]')
+    page.locator('[placeholder="Email"]') // will find all elements with the attribute 'placeholder="Email"'. The [] tells the test to look for this text in any attributes
+
+    // Combine different selectors
+    page.locator('input[placeholder="Email"][nbinput]') // will find all elements with both the nbinput and plaholder="Email" values
+
+    // by XPath (NOT RECOMMENDED)
+    page.locator('//*[@id="inputEmail"]')
+
+    // by partial text match
+    page.locator(':text("Using")') 
+
+    // by exact match
+    page.locator(':text-is("Using the Grid")')
+})
+
+// when creating tests with repeating code, use Hooks
 // hooks are: test.beforeAll, test.beforeEach, test.afterAll, test.afterEach
 // avoid using afterEach and afterAll as much as possible to improve stability and performance
 
-test.describe('suite1', () => {
-    test.beforeEach(async({page}) => {
-        await page.getByText('Charts').click()
-    })
+// Commented out lines 26 to 53 for Section 4 Lesson 24: Locator Sytanx Rules
+// test.describe('suite1', () => {
+    // test.beforeEach(async({page}) => {
+        // await page.getByText('Charts').click()
+    // })
 
-    test('the first test1', async({page}) => {
-        await page.getByText('Form Layouts').click()
-    })
+    // test('the first test1', async({page}) => {
+        // await page.getByText('Form Layouts').click()
+    // })
 
-    test('nav to datepicker page1', async({page}) => {
-        await page.getByText('Datepicker').click()
-    })
-})
-// I think suite1 is expected to fail here at the end of Section 3: 22. Hooks and Flow Control
+    // test('nav to datepicker page1', async({page}) => {
+        // await page.getByText('Datepicker').click()
+    // })
+// })
+// I think suite1 is expected to fail at the end of Section 3: 22. Hooks and Flow Control
 
-test.describe('suite2', () => {
-    test.beforeEach(async({page}) => {
-        await page.getByText('Forms').click()
-    })
+// test.describe('suite2', () => {
+    // test.beforeEach(async({page}) => {
+        // await page.getByText('Forms').click()
+    // })
 
-    test('the second test', async({page}) => {
-        await page.getByText('Form Layouts').click()
-    })
+    // test('the second test', async({page}) => {
+        // await page.getByText('Form Layouts').click()
+    // })
 
-    test('nav to datepicker page2', async({page}) => {
-        await page.getByText('Datepicker').click()
-    })
-})
+    // test('nav to datepicker page2', async({page}) => {
+        // await page.getByText('Datepicker').click()
+    // })
+// })
