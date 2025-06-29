@@ -14,8 +14,38 @@ import {test} from '@playwright/test'
 // fixtures are: page, browser
 // for Playwright methods that have the Promise response type, use the keyword await in front of the command in the body
 
-test('the first test', async({page}) => {
+test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/') // when using await function, always set the function to async as seen here or there will be an error
-    await page.getByText('Forms').click()
-    await page.getByText('Form Layouts').click()
+})
+
+// when creating tests with repeating code, use Hooks (see line 17)
+// hooks are: test.beforeAll, test.beforeEach, test.afterAll, test.afterEach
+// avoid using afterEach and afterAll as much as possible to improve stability and performance
+
+test.describe('suite1', () => {
+    test.beforeEach(async({page}) => {
+        await page.getByText('Charts').click()
+    })
+
+    test('the first test1', async({page}) => {
+        await page.getByText('Form Layouts').click()
+    })
+
+    test('nav to datepicker page1', async({page}) => {
+        await page.getByText('Datepicker').click()
+    })
+})
+
+test.describe('suite2', () => {
+    test.beforeEach(async({page}) => {
+        await page.getByText('Forms').click()
+    })
+
+    test('the second test', async({page}) => {
+        await page.getByText('Form Layouts').click()
+    })
+
+    test('nav to datepicker page2', async({page}) => {
+        await page.getByText('Datepicker').click()
+    })
 })
