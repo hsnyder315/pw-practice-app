@@ -100,8 +100,15 @@ test('User facing locators', async({page}) => {
     await page.getByText('Using the Grid').click()
 
     // getByTestId
-    await page.getByTestId('SignIn').click()
+    // TestID is the identifier I can define by myself in the source code
+    // For this particular check, I would need to search 'Sign In' for the location of the Sign In button code in the HTML source code. From there, I can then add an extra attribute 'data-testid' to the specific button in the source
+    await page.getByTestId('SignIn').click() 
 
     //getByTitle
-    await page.getByTitle('IoT Dashboard').click()
+    // await page.getByTitle('IoT Dashboard').click()
+})
+
+// Section 4 Lesson 26: Child Elements
+test('locating child elements', async({page}) => {
+    
 })
