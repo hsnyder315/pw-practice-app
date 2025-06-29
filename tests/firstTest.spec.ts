@@ -35,6 +35,7 @@ test.describe('suite1', () => {
         await page.getByText('Datepicker').click()
     })
 })
+// I think suite1 is expected to fail here at the end of Section 3: 22. Hooks and Flow Control
 
 test.describe('suite2', () => {
     test.beforeEach(async({page}) => {
