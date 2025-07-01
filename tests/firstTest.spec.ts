@@ -103,7 +103,7 @@ test('User facing locators', async({page}) => {
     // getByTestId
     // TestID is the identifier I can define by myself in the source code
     // For this particular check, I would need to search 'Sign In' for the location of the Sign In button code in the HTML source code. From there, I can then add an extra attribute 'data-testid' to the specific button in the source
-    await page.getByTestId('SignIn').click() 
+    await page.getByTestId('SignIn').click()
 
     // getByTitle
     // await page.getByTitle('IoT Dashboard').click()
@@ -210,10 +210,3 @@ test('Assertions', async({page}) => {
     await expect.soft(basicFormButton).toHaveText('Submit5')
     await basicFormButton.click()
 })
-
-// Section 4 Lesson 31: Auto-Waiting
-test('Auto-Waiting', async({page}) => {
-    
-})
-
-// Section 4 Lesson 32: Timeouts
