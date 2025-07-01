@@ -1,4 +1,5 @@
 import {expect, test} from '@playwright/test'
+// https://playwright.dev/
 
 // tests are written as test('name', (argument) => {body})
 // test('first test', () => {
@@ -187,5 +188,32 @@ test('Extracting Values', async({page}) => {
 
 // Section 4 Lesson 30: Assertions
 test('Assertions', async({page}) => {
+    const basicFormButton = page.locator('nb-card').filter({hasText: "Basic Form"}).locator('button')
+    
+    // General Assertions - expect().
+    // these do not need await appended to the start of each command
+    const value = 5
+    expect(value).toEqual(5)
+
+    // Need an assertion for the button
+    const text = await basicFormButton.textContent()
+    expect(text).toEqual("Submit")
+
+    // Locator assertion
+    // Also uses expect()., but instead of an exact value we provide a locator
+    // Because this is a search locator, we need to append the expect(). with an await
+    await expect(basicFormButton).toHaveText('Submit')
+
+    // Soft Assertion
+    // using .soft() will tell Playwright to continue the test even if there's a fail
+    // noit considered good practice so take care using
+    await expect.soft(basicFormButton).toHaveText('Submit5')
+    await basicFormButton.click()
+})
+
+// Section 4 Lesson 31: Auto-Waiting
+test('Auto-Waiting', async({page}) => {
     
 })
+
+// Section 4 Lesson 32: Timeouts
