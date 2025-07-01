@@ -207,6 +207,6 @@ test('Assertions', async({page}) => {
     // Soft Assertion
     // using .soft() will tell Playwright to continue the test even if there's a fail
     // noit considered good practice so take care using
-    await expect.soft(basicFormButton).toHaveText('Submit5')
+    await expect.soft(basicFormButton).toHaveText('Submit')
     await basicFormButton.click()
 })
