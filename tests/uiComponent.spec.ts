@@ -218,6 +218,71 @@ test.describe('Datepicker Page', () => {
 
     // Section 5 Lesson 42 & 43: Date Picker
     test('Common Datepicker', async({page}) => {
+        // Find and open the calendar picker
+        // const calendarInputField = page.getByPlaceholder('Form Picker')
+        // await calendarInputField.click()
+
+        // Select a date starting with a new locator to find the class specifically for the days only in the month of July
+        // Without {exact: true} being inserted with the .getByText value as seen, Playwright will error out on how many numbers include the text 1 in the number (i.e. 1, 10, 21, etc.)
+        // await page.locator('[class="day-cell ng-star-inserted"]').getByText('1', {exact: true}).click()
+        // await expect(calendarInputField).toHaveValue('Jul 1, 2025')
+        // Not exactly the recommended method as the hardcoded date limits the possible testing that can be accomplished on the date pickers
+        // Using JavaScript, the datepicker test can be automated more efficiently and effectively:
+
+        const calendarInputField = page.getByPlaceholder('Form Picker')
+        await calendarInputField.click()
         
+        let date = new Date()
+        date.setDate(date.getDate() + 5000)
+        const expectedDate = date.getDate().toString()
+        const expectedMonthShort = date.toLocaleString('EN-US', {month: 'short'})
+        const expectedMonthLong = date.toLocaleString('EN-US', {month: 'long'})
+        const expectedYear = date.getFullYear()
+        const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`
+
+        let calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+        const expectedMonthAndYear = ` ${expectedMonthLong} ${expectedYear}`
+        while(!calendarMonthAndYear.includes(expectedMonthAndYear)){
+            await page.locator('nb-calendar-pageable-navigation [data-name="chevron-right"]').click()
+            calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+        }
+
+        await page.locator('[class="day-cell ng-star-inserted"]').getByText(expectedDate, {exact: true}).click()
+        await expect(calendarInputField).toHaveValue(dateToAssert)
+    })
+})
+
+test.describe('IoT Dashboard Page', () => {
+    // Section 5 Lesson 43: Sliders
+    test('sliders', async({page}) => {
+        // Update attributes
+        const tempGauge = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger circle')
+        // How to get access to the cx andf cy attributes and update them
+        await tempGauge.evaluate(node => {
+            node.setAttribute('cx', '232.630')
+            node.setAttribute('cy', '232.630')
+        })
+        await tempGauge.click() // without the click on the gauge, we end up moving the Circle UI element without the even triggering to move the blue bar with it
+
+        // Mouse movement
+        const tempBox = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger')
+        // Ensure the entire tempBox is entirely in view before the test runs
+        await tempBox.scrollIntoViewIfNeeded()
+        // Define the .boundingBox
+        // .boundingBox = when you call this method, Playwright coordinates around the box with X and Y coordinates that start in the top left corner with coordinates x=0, y=0
+        // Start with creating starting coordinates focused on the center of the box
+        const box = await tempBox.boundingBox()
+        const x = box.x + box.width / 2
+        const y = box.y + box.height / 2
+
+        // Now move mouse around center of the box
+        await page.mouse.move(x, y)
+        await page.mouse.down() // simulates select+hold of the left click button on mouse
+        await page.mouse.move(x+100, y) // moves mouse 100 pixels to the right without moving horizontally
+        await page.mouse.move(x+100, y+100) // moves mouse down from previous point
+        await page.mouse.up() // simulates releasing the left click on the mouse button
+
+        // Finally make an assertion verifying the test result is showing the correct number on the temp gauge
+        await expect(tempBox).toContainText('30')
     })
 })
