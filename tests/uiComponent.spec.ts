@@ -139,13 +139,6 @@ test.describe('Tooltip Page', () => {
     })
 })
 
-test.describe('Dialog Page', () => {
-    test.beforeEach(async({page}) => {
-        await page.getByText('Modal & Overlays').click()
-        await page.getByText('Dialog').click()
-    })
-})
-
 test.describe('Smart Table Page', () => {
     test.beforeEach(async({page}) => {
         await page.getByText('Tables & Data').click()
@@ -167,9 +160,64 @@ test.describe('Smart Table Page', () => {
         await expect(page.locator('table tr').first()).not.toHaveText('mdo@gmail.com')
     })
 
-    // Section 5 Lesson 39: Web Tables (Part 1)
-    test('Web Tables 1', async({page}) => {
-        // how to get the row by any text in the row
+    // Section 5 Lesson 39 & 40: Web Tables
+    test('Web Tables', async({page}) => {
+        // 1. How to get the row by any text in the row
         const targetRow = page.getByRole('row', {name: "twitter@outlook.com"})
+        // then select the edit button
+        await targetRow.locator('.nb-edit').click()
+        // now find and edit the age input field
+        await page.locator('input-editor').getByPlaceholder('Age').clear()
+        await page.locator('input-editor').getByPlaceholder('Age').fill('35')
+        await page.locator('.nb-checkmark').click()
+
+        // 2. How to get the row based on the value in a specific column
+        await page.locator('.ng2-smart-pagination-nav').getByText('2').click()
+        // create a locator for row by ID 11
+        const targetRowByID = page.getByRole('row', {name: "11"}).filter({has: page.locator('td').nth(1).getByText('11')})
+        await targetRowByID.locator('.nb-edit').click() //  await targetRowByID.click() alone finds two rows on Page 2 using the text 11. need to add a Filter in the const as seen above
+        // now edit the Email field
+        await page.locator('input-editor').getByPlaceholder('E-mail').clear()
+        await page.locator('input-editor').getByPlaceholder('E-mail').fill('test@test.com')
+        await page.locator('.nb-checkmark').click()
+        // add assertion to verify we successfully made the change
+        await expect(targetRowByID.locator('td').nth(5)).toHaveText('test@test.com')
+
+        // 3. How to test table filters
+        const ages = ["20", "30", "40", "200"]
+        // Create a for loop to verify each age is correctly input in the Age filter field
+        for(let age of ages){
+            await page.locator('input-filter').getByPlaceholder('Age').clear()
+            await page.locator('input-filter').getByPlaceholder('Age').fill(age)
+            await page.waitForTimeout(500)
+            // Next step is to get all the rows from the table for each filtered age
+            // Create a new for loop inside of this for loop using a new locator called ageRows
+            const ageRows = page.locator('tbody tr')
+            for(let row of await ageRows.all()){
+                // For each row, get a cell value with a new locator called cellValue
+                const cellValue = await row.locator('td').last().textContent()
+                // Then, make an assertion
+                if(age == "200"){
+                    expect(await page.getByRole('table').textContent()).toContain('No data found')
+                } else {
+                    expect(cellValue).toEqual(age)
+                }
+
+                // Without the delay added above, this test will fail as Playwright is moving faster than the page can load when the next age value is input after the first
+                // There will also need to be a modification to the script to account for 200 returning no results, as seen after the cellValue const
+            }
+        }
+    })
+})
+
+test.describe('Datepicker Page', () => {
+    test.beforeEach(async({page}) => {
+        await page.getByText('Forms').click()
+        await page.getByText('Datepicker').click()
+    })
+
+    // Section 5 Lesson 42 & 43: Date Picker
+    test('Common Datepicker', async({page}) => {
+        
     })
 })
