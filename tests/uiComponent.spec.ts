@@ -119,3 +119,57 @@ test.describe('Header', () => {
         }
     })
 })
+
+test.describe('Tooltip Page', () => {
+    test.beforeEach(async({page}) => {
+        await page.getByText('Modal & Overlays').click()
+        await page.getByText('Tooltip').click()
+    })
+    
+    // Section 5 Lesson 37: Tooltips
+    test('Tooltips', async({page}) => {
+        // Find and hover over the Top Tooltip
+        const toolTipCard = page.locator('nb-card', {hasText: "Tooltip Placements"})
+        await toolTipCard.getByRole('button', {name: "Top"}).hover()
+
+        // Identify the Top tooltip
+        page.getByRole('tooltip') // tooltip exists within playwright but does not work if the role tooltip is not created in the web element
+        const tooltip = await page.locator('nb-tooltip').textContent()
+        expect(tooltip).toEqual('This is a tooltip')
+    })
+})
+
+test.describe('Dialog Page', () => {
+    test.beforeEach(async({page}) => {
+        await page.getByText('Modal & Overlays').click()
+        await page.getByText('Dialog').click()
+    })
+})
+
+test.describe('Smart Table Page', () => {
+    test.beforeEach(async({page}) => {
+        await page.getByText('Tables & Data').click()
+        await page.getByText('Smart Table').click()
+    })
+
+    // Section 5 Lesson 38: Dialog Boxes
+    test('Dialog Box', async({page}) => {
+        // Listener
+        page.on('dialog', dialog => {
+            expect(dialog.message()).toEqual('Are you sure you want to delete?')
+            dialog.accept()
+        })
+
+        await page.getByRole('table').locator('tr', {hasText: "mdo@gmail.com"}).locator('.nb-trash').click()
+        // this will find and select the trash icon for the first entry, however, the dialog box is automatically seen and cancelled by Playwright without accepting the dialog box unless a listener is created as seen above
+        
+        // After the row has been deleted, a new assertion must be made to verify the row does not have the email of the one deleted in the test
+        await expect(page.locator('table tr').first()).not.toHaveText('mdo@gmail.com')
+    })
+
+    // Section 5 Lesson 39: Web Tables (Part 1)
+    test('Web Tables 1', async({page}) => {
+        // how to get the row by any text in the row
+        const targetRow = page.getByRole('row', {name: "twitter@outlook.com"})
+    })
+})
