@@ -19,4 +19,29 @@ export class NavigationPage {
         await this.page.getByText('Forms').click()
         await this.page.getByText('Form Layouts').click()
     }
+
+    // Datepicker Page
+    async datepickerPage(){
+        await this.page.getByText('Forms').click()
+        // await this.page.waitForTimeout(3000)
+        await this.page.getByText('Datepicker').click()
+    }
+    
+    // Smart Tale Page
+    async smartTablePage(){
+        await this.page.getByText('Tables & Data').click()
+        await this.page.getByText('Smart Table').click()
+    }
+
+    // toastr Page
+    async toastrPage(){
+        await this.page.getByText('Modal & Overlays').click()
+        await this.page.getByText('Toastr').click()
+    }
+
+    // Tooltip Page
+    async tooltipPage(){
+        await this.page.getByText('Modal & Overlays').click()
+        await this.page.getByText('Tooltip').click()
+    }
 }

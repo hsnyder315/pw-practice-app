@@ -9,7 +9,7 @@ test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/')
 })
 
-test('Nav to Form Page', async({page}) => {
+test('Nav to Form Pages', async({page}) => {
     // To use the new class, we need a new instance of the page object in the test
     const navTo = new NavigationPage(page)
     await navTo.formLayoutsPage()
