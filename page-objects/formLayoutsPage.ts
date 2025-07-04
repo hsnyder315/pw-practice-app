@@ -1,15 +1,13 @@
 // Section 5 Lesson 49: Parameterized Methods
-import { Locator, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
+import { HelperBase } from "./helperBase";
 
 // In this lesson, we want Playwright to submit the Using the Grid card with an email and password set, as well as an option selected.
 // First, we create the class for the Form Layouts page.
-export class FormLayoutsPage {
-    // Then we create a new field for the page:
-    private readonly page: Page
-
+export class FormLayoutsPage extends HelperBase {
     // Next, we create the constructor:
     constructor(page: Page){
-        this.page = page
+        super(page)
     }
 
     // Now we can create our first method to submit the form for Using the Grid:

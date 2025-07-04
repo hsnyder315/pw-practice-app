@@ -1,6 +1,7 @@
 // Section 6 Lesson 46 - 52: Page Objects
 import { expect, test } from '@playwright/test'
 import { PageManager } from '../page-objects/pageManager'
+
 // Created page-objects folder
 // After page object is created, import to appropriate files as seen here. Be sure to include export before class for any that you wish to import to a file.
 // import { NavigationPage } from '../page-objects/navigationPage' - commented out for section 6 lesson 51 as it's now being handled in pageManager.ts and the new import above

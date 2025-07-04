@@ -1,14 +1,15 @@
 // Section 6 Lesson 46: First Page Object
 // Start by importing Page from Playwright:
-import { Locator, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
+import { HelperBase } from "./helperBase";
 
 // Then, in the context of navigating with the nav bar, create a new class. All classes must start with a capitalized letter.
-export class NavigationPage {
+export class NavigationPage extends HelperBase {
     // Inside the class, we need a constructor that functions from the Page import
     // Inside the constructor parenthesis, a required parameter must be set to be constructed when we call this page object
     // Using TypeScript, we define the page parameter with a colon and the type Page
     // We also add a new field in the class (see: readonly page: Page) to help fill in our constructor
-    readonly page: Page
+    // readonly page: Page - commented out as part of Section 6 Lesson 52
 
     // Commented out lines 13 - 20 as they will not be used anymore, but are here as an example of how Playwright recommends separating locators from methods
     // readonly formLayoutsMenuItem: Locator
@@ -21,7 +22,7 @@ export class NavigationPage {
 
     constructor(page: Page){
         // Inside the constructor parenthesis, we can now have the constructor parameter pass through the readonly field:
-        this.page = page
+        super(page)
 
         // Commented out lines 26-31 as they will not be used anymore, but are here as an example of how Playwright recommends separating locators from methods
         // this.formLayoutsMenuItem = page.getByText('Form Layouts')
@@ -36,6 +37,7 @@ export class NavigationPage {
         // await this.page.getByText('Forms').click() - commented out as the next line was created to cover this action from the private method below
         await this.selectGroupMenuItem('Forms')
         await this.page.getByText('Form Layouts').click()
+        await this.waitForNumberOfSeconds(2)
     }
 
     // Datepicker Page
