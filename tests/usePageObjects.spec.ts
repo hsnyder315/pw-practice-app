@@ -1,9 +1,9 @@
 // Section 6 Lesson 46: First Page Object
-import {expect, test} from '@playwright/test'
+import { expect, test } from '@playwright/test'
 // Created page-objects folder
 // After page object is created, import to appropriate files as seen here. Be sure to include export before class for any that you wish to import to a file.
-import {NavigationPage} from '../page-objects/navigationPage'
-
+import { NavigationPage } from '../page-objects/navigationPage'
+import { FormLayoutsPage } from '../page-objects/formLayoutsPage'
 
 test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/')
@@ -17,4 +17,13 @@ test('Navigation in Side Bar', async({page}) => {
     await navTo.smartTablePage()
     await navTo.toastrPage()
     await navTo.tooltipPage()
+})
+
+test('Paramaterized Methods', async({page}) => {
+    const navigateTo = new NavigationPage(page)
+    const onFormLayoutsPage = new FormLayoutsPage(page)
+
+    await navigateTo.formLayoutsPage()
+    await onFormLayoutsPage.submitUsingTheGridFormWithCredentialsAndSelectOption('test@test.com', 'Welcome1', 'Option 1')
+    await onFormLayoutsPage.submitUsingInlineFormWithNameEmailAndCheckbox('John Smith', 'John@test.com', true)
 })
