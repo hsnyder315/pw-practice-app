@@ -21,6 +21,7 @@ test('Navigation in Side Bar', async({page}) => {
     await pm.navigateTo().smartTablePage()
     await pm.navigateTo().toastrPage()
     await pm.navigateTo().tooltipPage()
+    await pm.navigateTo().dialogPage()
 })
 
 test('Paramaterized Methods', async({page}) => {

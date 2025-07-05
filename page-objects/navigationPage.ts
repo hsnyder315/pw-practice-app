@@ -65,6 +65,12 @@ export class NavigationPage extends HelperBase {
         await this.page.getByText('Tooltip').click()
     }
 
+    // Dialog Page
+    async dialogPage (){
+        await this.selectGroupMenuItem('Modal & Overlays')
+        await this.page.getByText('Dialog').click()
+    }
+
     // In the above methods, after the very first one, Playwright will move too quickly through selecting Form to find the second method, but will not progress to the rest
     // This is because Playwright is reading to select Forms multiple times so on the second time it selects Forms, it closes the forms dropdown, thus it cannot find the Datepicker nav link anymore
     // The aria-expanded class is changing from True when the Forms dropdown is open, and False when it is closed, so we can use the value of this attribute to control the flow of the test

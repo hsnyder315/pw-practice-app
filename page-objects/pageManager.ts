@@ -3,18 +3,21 @@ import { Page, expect } from "@playwright/test";
 import { NavigationPage } from '../page-objects/navigationPage';
 import { FormLayoutsPage } from '../page-objects/formLayoutsPage';
 import { DatepickerPage } from '../page-objects/datepickerPage';
+import { DialogPage } from "./dialogPage";
 
 export class PageManager{
     private readonly page: Page
     private readonly navigationPage: NavigationPage
     private readonly formLayoutsPage: FormLayoutsPage
     private readonly datepickerPage: DatepickerPage
+    private readonly dialogPage: DialogPage
 
     constructor(page:Page){
         this.page = page
         this.navigationPage = new NavigationPage(this.page)
         this.formLayoutsPage = new FormLayoutsPage(this.page)
         this.datepickerPage = new DatepickerPage(this.page)
+        this.dialogPage = new DialogPage(this.page)
     }
 
     navigateTo(){
@@ -27,5 +30,9 @@ export class PageManager{
 
     onDatepickerPage(){
         return this.datepickerPage
+    }
+
+    onDialogPage(){
+        return this.dialogPage
     }
 }
