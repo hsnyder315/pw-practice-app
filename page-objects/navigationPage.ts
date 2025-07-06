@@ -33,6 +33,7 @@ export class NavigationPage extends HelperBase {
     }
 
     // Now that we have our page fixture setup, we can create a new functional method with locators inside of it.
+    // Form Layouts Page
     async formLayoutsPage(){
         // await this.page.getByText('Forms').click() - commented out as the next line was created to cover this action from the private method below
         await this.selectGroupMenuItem('Forms')
@@ -46,11 +47,23 @@ export class NavigationPage extends HelperBase {
         await this.selectGroupMenuItem('Forms')
         await this.page.getByText('Datepicker').click()
     }
-    
-    // Smart Table Page
-    async smartTablePage(){
-        await this.selectGroupMenuItem('Tables & Data')
-        await this.page.getByText('Smart Table').click()
+
+    // Dialog Page
+    async dialogPage (){
+        await this.selectGroupMenuItem('Modal & Overlays')
+        await this.page.getByText('Dialog').click()
+    }
+
+    // Window Page
+    async windowPage (){
+        await this.selectGroupMenuItem('Modal & Overlays')
+        await this.page.getByText('Window').click()
+    }
+
+    // Popover Page
+    async popoverPage (){
+        await this.selectGroupMenuItem('Modal & Overlays')
+        await this.page.getByText('Popover').click()
     }
 
     // Toastr Page
@@ -65,10 +78,61 @@ export class NavigationPage extends HelperBase {
         await this.page.getByText('Tooltip').click()
     }
 
-    // Dialog Page
-    async dialogPage (){
-        await this.selectGroupMenuItem('Modal & Overlays')
-        await this.page.getByText('Dialog').click()
+    // Calendar Page
+    async calendarPage (){
+        await this.selectGroupMenuItem('Extra Components')
+        await this.page.getByText('Calendar').click()
+    }
+
+    // eCharts Page
+    async eChartsPage (){
+        await this.selectGroupMenuItem('Charts')
+        await this.page.getByText('Echarts').click()
+    }
+    
+    // Smart Table Page
+    async smartTablePage(){
+        await this.selectGroupMenuItem('Tables & Data')
+        await this.page.getByText('Smart Table').click()
+    }
+
+    // Tree Grid Page
+    async treeGridPage (){
+        await this.selectGroupMenuItem('Tables & Data')
+        await this.page.getByText('Tree Grid').click()
+    }
+
+    // Auth Login Page
+    async authLoginPage (){
+        await this.selectGroupMenuItem('Auth')
+        await this.page.getByText('Login').click()
+        await this.page.getByLabel('[class="link back-link"]')
+    }
+
+    // Auth Register Page
+    async authRegisterPage (){
+        await this.selectGroupMenuItem('Auth')
+        await this.page.getByText('Register').click()
+        await this.page.getByLabel('[class="link back-link"]').click()
+    }
+
+    // Auth Request Password Page
+    async authRequestPasswordPage (){
+        await this.selectGroupMenuItem('Auth')
+        await this.page.getByText('Request Password').click()
+        await this.page.getByLabel('[class="link back-link"]').click()
+    }
+
+    // Auth Reset Password Page
+    async authResetPasswordPage (){
+        await this.selectGroupMenuItem('Auth')
+        await this.page.getByText('Reset Password').click()
+        await this.page.getByLabel('[ng-reflect-icon="arrow-back"]').click()
+    }
+
+    // IoT Dashboard Page
+    async iotDashboardPage (){
+        await this.selectGroupMenuItem('IoT Dashboard')
     }
 
     // In the above methods, after the very first one, Playwright will move too quickly through selecting Form to find the second method, but will not progress to the rest
@@ -80,5 +144,9 @@ export class NavigationPage extends HelperBase {
         const expandedState = await groupMenuItem.getAttribute('aria-expanded')
         if(expandedState == "false")
             await groupMenuItem.click()
+    }
+
+    private async selectBackButton(backButton: string){
+        const pageBackButton = this.page.getByLabel(backButton).click()
     }
 }
