@@ -4,14 +4,18 @@ test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/')
 })
 
-test.describe('Form Layouts Page', () => {
+test.describe.only('Form Layouts Page', () => {
+    test.describe.configure({retries: 2}) // Added during section 8 lesson 63, overrides default retry count
     test.beforeEach(async({page}) => {
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
     })
 
     // Section 5 Lesson 33: Input Fields
-    test('Input Fields', async({page}) => {
+    test('Input Fields', async({page}, testInfo) => {
+        if(testInfo.retry){
+            // do something
+        }
         // create locator
         const usingTheGridEmailInput = page.locator('nb-card', {hasText: "Using the Grid"}).getByRole('textbox', {name: "Email"})
 
@@ -25,7 +29,7 @@ test.describe('Form Layouts Page', () => {
     
         // Generic Assertion
         const inputValue = await usingTheGridEmailInput.inputValue()
-        expect(inputValue).toEqual('test2@test.com')
+        expect(inputValue).toEqual('test2@test.com1')
 
         // Locator Assertion
         await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
