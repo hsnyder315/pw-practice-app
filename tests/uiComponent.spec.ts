@@ -1,11 +1,13 @@
 import {expect, test} from '@playwright/test'
 
+test.describe.configure({mode: 'parallel'})
+
 test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/')
 })
 
-test.describe.only('Form Layouts Page', () => {
-    test.describe.configure({retries: 2}) // Added during section 8 lesson 63, overrides default retry count
+test.describe('Form Layouts Page', () => {
+    test.describe.configure({retries: 2}) // Added during section 8 lesson 63, overrides default retry count, but not recommended method
     test.beforeEach(async({page}) => {
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
@@ -13,9 +15,6 @@ test.describe.only('Form Layouts Page', () => {
 
     // Section 5 Lesson 33: Input Fields
     test('Input Fields', async({page}, testInfo) => {
-        if(testInfo.retry){
-            // do something
-        }
         // create locator
         const usingTheGridEmailInput = page.locator('nb-card', {hasText: "Using the Grid"}).getByRole('textbox', {name: "Email"})
 
@@ -25,11 +24,11 @@ test.describe.only('Form Layouts Page', () => {
         await usingTheGridEmailInput.clear() // Clears the text input in the Email input field on the Using the Grid card
         // Input text by simulating keystrokes - .pressSequentially()
         // Can add a delay between the keystrokes using {delay: <number in milliseconds>}  option as a value in the promise parenthesis
-        await usingTheGridEmailInput.pressSequentially('test2@test.com', {delay: 500}) // Fills the Email input field of the Using the Grid card with test@test.com while capturing the keystrokes
+        await usingTheGridEmailInput.pressSequentially('test2@test.com') // Fills the Email input field of the Using the Grid card with test@test.com while capturing the keystrokes
     
         // Generic Assertion
         const inputValue = await usingTheGridEmailInput.inputValue()
-        expect(inputValue).toEqual('test2@test.com1')
+        expect(inputValue).toEqual('test2@test.com')
 
         // Locator Assertion
         await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')

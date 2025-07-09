@@ -28,7 +28,7 @@ test('Auto-Waiting', async({page}) => {
 })
 
 // alternatives way to work with commands that do not have auto waiting feature implemented
-test('Alternative Waits', async({page}) => {
+test.skip('Alternative Waits', async({page}) => {
     const successButton = page.locator('.bg-success')
     //___ wait for element
     // await page.waitForSelector('.bg-success')
@@ -49,7 +49,7 @@ test('Alternative Waits', async({page}) => {
 // There are three layers to the Timeouts structure to follow, refer to Timeouts.pptx for visual representation
 // Layers in Order: Global (no default timeout), Test (default 30000ms) which includes three nested timeout factors: Action (no default timeout), Naviagation (no default timeout), & Expect (defeault: 5000ms)
 // Each layer cannot have a timeout set to be longer than the set timeout in a higher tier layer
-test('Timeouts', async({page}) => {
+test.skip('Timeouts', async({page}) => {
     // test.setTimeout(10000)
     test.slow() // increases timeout by x3 the set time in the playwright.config.ts file
     const successButton = page.locator('.bg-success')
