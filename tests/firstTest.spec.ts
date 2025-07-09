@@ -16,7 +16,7 @@ import {expect, test} from '@playwright/test'
 // for Playwright methods that have the Promise response type, use the keyword await in front of the command in the body. This tells Playwright to wait till the command/assertion is completed.
 
 test.beforeEach(async({page}) => {
-    await page.goto('http://localhost:4200/') // when using await function, always set the function to async as seen here or there will be an error
+    await page.goto('/') // when using await function, always set the function to async as seen here or there will be an error
     await page.getByText('Forms').click() // Section 4 Lesson 24
     await page.getByText('Form Layouts').click() // Section 4 Lesson 24
 })

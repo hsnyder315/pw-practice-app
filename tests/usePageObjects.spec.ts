@@ -10,7 +10,7 @@ import { faker } from '@faker-js/faker'
 // import { DatepickerPage } from '../page-objects/datepickerPage' - commented out for section 6 lesson 51 as it's now being handled in pageManager.ts and the new import above
 
 test.beforeEach(async({page}) => {
-    await page.goto('http://localhost:4200/')
+    await page.goto('/')
 })
 
 test('Navigation in Side Bar', async({page}) => {
@@ -45,7 +45,7 @@ test('Paramaterized Methods', async({page}) => {
     // const onDatepickerPage = new DatepickerPage(page) - commented out for section 6 lesson 51 as it's now being handled in pageManager.ts and the new const above
 
     await pm.navigateTo().formLayoutsPage()
-    await pm.onFormLayoutsPage().submitUsingTheGridFormWithCredentialsAndSelectOption(randomEmail, 'Welcome1', 'Option 1')
+    await pm.onFormLayoutsPage().submitUsingTheGridFormWithCredentialsAndSelectOption(process.env.USERNAME, process.env.PASSWORD, 'Option 2')
     await page.screenshot({path: 'screenshots/formLayoutsPage.png'})
     const buffer = await page.screenshot() // saves above screenshot in to this constant
     console.log(buffer.toString('base64')) // takes screenshot constant and returns a binary in the console log
