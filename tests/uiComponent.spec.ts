@@ -6,7 +6,7 @@ test.beforeEach(async({page}) => {
     await page.goto('/')
 })
 
-test.describe('Form Layouts Page', () => {
+test.describe('Form Layouts Page @block', () => {
     test.describe.configure({retries: 2}) // Added during section 8 lesson 63, overrides default retry count, but not recommended method
     test.beforeEach(async({page}) => {
         await page.getByText('Forms').click()

@@ -13,7 +13,7 @@ test.beforeEach(async({page}) => {
     await page.goto('/')
 })
 
-test('Navigation in Side Bar', async({page}) => {
+test('Navigation in Side Bar @smoke', async({page}) => {
     const pm = new PageManager(page)
     // To use the new class, we need a new instance of the page object in the test
     // const navTo = new NavigationPage(page) - commented out for section 6 lesson 51 as it's now being handled in pageManager.ts and the new const above
@@ -35,7 +35,7 @@ test('Navigation in Side Bar', async({page}) => {
     await pm.navigateTo().windowPage()
 })
 
-test('Paramaterized Methods', async({page}) => {
+test('Paramaterized Methods @smoke', async({page}) => {
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName()
     const randomEmail = `${randomFullName.replace(' ', '')}${faker.number.int(1000)}@test.com`
