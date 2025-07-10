@@ -14,7 +14,7 @@ export default defineConfig<TestOptions>({
     timeout: 2000
   },
 
-  retries: 1,
+  retries: 0,
 
   reporter: 'html',
 

@@ -87,7 +87,7 @@ export class NavigationPage extends HelperBase {
     // eCharts Page
     async eChartsPage (){
         await this.selectGroupMenuItem('Charts')
-        await this.page.getByText('Echarts').click()
+        this.page.locator('[nbmenuitem=""]')
     }
     
     // Smart Table Page
@@ -106,28 +106,28 @@ export class NavigationPage extends HelperBase {
     async authLoginPage (){
         await this.selectGroupMenuItem('Auth')
         await this.page.getByText('Login').click()
-        await this.page.getByLabel('[class="link back-link"]')
+        await this.page.locator('[data-name="arrow-back"]').click()
     }
 
     // Auth Register Page
     async authRegisterPage (){
         await this.selectGroupMenuItem('Auth')
         await this.page.getByText('Register').click()
-        await this.page.getByLabel('[class="link back-link"]').click()
+        await this.page.locator('[data-name="arrow-back"]').click()
     }
 
     // Auth Request Password Page
     async authRequestPasswordPage (){
         await this.selectGroupMenuItem('Auth')
         await this.page.getByText('Request Password').click()
-        await this.page.getByLabel('[class="link back-link"]').click()
+        await this.page.locator('[data-name="arrow-back"]').click()
     }
 
     // Auth Reset Password Page
     async authResetPasswordPage (){
         await this.selectGroupMenuItem('Auth')
         await this.page.getByText('Reset Password').click()
-        await this.page.getByLabel('[ng-reflect-icon="arrow-back"]').click()
+        await this.page.locator('[data-name="arrow-back"]').click()
     }
 
     // IoT Dashboard Page

@@ -23,12 +23,12 @@ test('Navigation in Side Bar @smoke', async({page}) => {
     await pm.navigateTo().toastrPage()
     await pm.navigateTo().tooltipPage()
     await pm.navigateTo().dialogPage()
-    // await pm.navigateTo().authLoginPage() - commented out auth checks to add in finding and selecting the back button in the different auth pages to navigationPage.ts
-    // await pm.navigateTo().authRegisterPage()
-    // await pm.navigateTo().authRequestPasswordPage()
-    // await pm.navigateTo().authResetPasswordPage()
+    await pm.navigateTo().authLoginPage()
+    await pm.navigateTo().authRegisterPage()
+    await pm.navigateTo().authRequestPasswordPage()
+    await pm.navigateTo().authResetPasswordPage()
     await pm.navigateTo().calendarPage()
-    // await pm.navigateTo().eChartsPage()
+    // await pm.navigateTo().eChartsPage() - need to figure out how to find echarts without running in to the issue of it also having charts in the name
     await pm.navigateTo().popoverPage()
     await pm.navigateTo().smartTablePage()
     await pm.navigateTo().treeGridPage()

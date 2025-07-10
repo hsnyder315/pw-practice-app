@@ -1,5 +1,5 @@
 // Section 6 Lesson 51: Page Objects Manager
-import { Page, expect } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { NavigationPage } from '../page-objects/navigationPage';
 import { FormLayoutsPage } from '../page-objects/formLayoutsPage';
 import { DatepickerPage } from '../page-objects/datepickerPage';
