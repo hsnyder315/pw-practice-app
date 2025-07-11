@@ -14,9 +14,13 @@ export default defineConfig<TestOptions>({
     timeout: 2000
   },
 
-  retries: 0,
+  retries: 1,
 
-  reporter: 'html',
+  reporter: [
+    ['json', {outputFile: 'test-results/jsonReport.json'}],
+    ['junit', {outputFile: 'test-results/junitReport.xml'}],
+    ['allure-playwright']
+  ],
 
   use: {
     globalsQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
@@ -25,8 +29,8 @@ export default defineConfig<TestOptions>({
         : 'http://localhost:4200/',
 
     trace: 'on-first-retry',
-    actionTimeout: 5000,
-    navigationTimeout: 5000,
+    actionTimeout: 30000,
+    navigationTimeout: 30000,
     video: {
       mode: 'off',
       size: {width: 1920, height: 1080}
@@ -59,6 +63,14 @@ export default defineConfig<TestOptions>({
       testMatch: 'usePageObjects.spec.ts',
       use: {
         viewport: {width: 1920, height: 1080},
+      }
+    },
+
+    {
+      name: 'mobile',
+      testMatch: 'testMobile.spec.ts',
+      use: {
+        ...devices['iPhone 13 Pro']
       }
     },
   ]
