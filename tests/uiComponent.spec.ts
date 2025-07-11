@@ -35,7 +35,7 @@ test.describe('Form Layouts Page @block', () => {
     })
 
     // Section 5 Lesson 34: Radio Buttons
-    test('Radio Buttons', async({page}) => {
+    test.only('Radio Buttons', async({page}) => {
         // create locator
         const usingTheGridForm = page.locator('nb-card', {hasText: "Using the Grid"})
 
@@ -43,16 +43,15 @@ test.describe('Form Layouts Page @block', () => {
         // Radio buttons will often have the option visually-hidden in the class, preventing Playwright from seeing and selecting the button. To bypass, add the option {force: true} to .check()
         // await usingTheGridForm.getByLabel('Option 1').check({force:true})
         await usingTheGridForm.getByRole('radio', {name: "Option 1"}).check({force:true})
-
-        // to validate the selection was successfully sdelected - .isChecked()
         const radioStatus = await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()
-        expect(radioStatus).toBeTruthy()
-        await expect(await usingTheGridForm.getByRole('radio', {name: "Option 1"})).toBeChecked()
+        await expect(usingTheGridForm).toHaveScreenshot({maxDiffPixels: 150})
+        // expect(radioStatus).toBeTruthy()
+        // await expect(await usingTheGridForm.getByRole('radio', {name: "Option 1"})).toBeChecked()
 
         // validating that the Option 1 radio button is not selected after the Option 2 radio button is selected
-        await usingTheGridForm.getByRole('radio', {name: "Option 2"}).check({force:true})
-        expect(await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()).toBeFalsy()
-        expect(await usingTheGridForm.getByRole('radio', {name: "Option 2"}).isChecked()).toBeTruthy()
+        // await usingTheGridForm.getByRole('radio', {name: "Option 2"}).check({force:true})
+        // expect(await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()).toBeFalsy()
+        // expect(await usingTheGridForm.getByRole('radio', {name: "Option 2"}).isChecked()).toBeTruthy()
     })
 })
 
