@@ -2,6 +2,7 @@
 import { expect, test } from '@playwright/test'
 import { PageManager } from '../page-objects/pageManager'
 import { faker } from '@faker-js/faker'
+import { argosScreenshot } from "@argos-ci/playwright"
 
 // Created page-objects folder
 // After page object is created, import to appropriate files as seen here. Be sure to include export before class for any that you wish to import to a file.
@@ -59,5 +60,7 @@ test('Paramaterized Methods @smoke', async({page}) => {
 test.only('Testing with Argos CI', async({page}) => {
     const pm = new PageManager(page)
     await pm.navigateTo().datepickerPage()
+    await argosScreenshot(page, "Datepicker Page")
     await pm.navigateTo().formLayoutsPage()
+    await argosScreenshot(page, "Form Layouts Page")
 })
