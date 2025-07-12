@@ -29,7 +29,7 @@ test('Navigation in Side Bar @smoke', async({page}) => {
     await pm.navigateTo().authRequestPasswordPage()
     await pm.navigateTo().authResetPasswordPage()
     await pm.navigateTo().calendarPage()
-    // await pm.navigateTo().eChartsPage() - need to figure out how to find echarts without running in to the issue of it also having charts in the name
+    // await pm.navigateTo().eChartsPage() // - need to figure out how to find echarts without running in to the issue of it also having charts in the name
     await pm.navigateTo().popoverPage()
     await pm.navigateTo().smartTablePage()
     await pm.navigateTo().treeGridPage()
@@ -57,10 +57,10 @@ test('Paramaterized Methods @smoke', async({page}) => {
     await pm.onDatepickerPage().selectDatePickerWithRangeFromToday(6, 15)
 })
 
-test.only('Testing with Argos CI', async({page}) => {
-    const pm = new PageManager(page)
-    await pm.navigateTo().datepickerPage()
-    await argosScreenshot(page, "Datepicker Page")
-    await pm.navigateTo().formLayoutsPage()
-    await argosScreenshot(page, "Form Layouts Page")
-})
+// test.only('Testing with Argos CI', async({page}) => {
+//     const pm = new PageManager(page)
+//     await pm.navigateTo().datepickerPage()
+//     await argosScreenshot(page, "Datepicker Page")
+//     await pm.navigateTo().formLayoutsPage()
+//     await argosScreenshot(page, "Form Layouts Page")
+// })
