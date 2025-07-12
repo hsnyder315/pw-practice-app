@@ -36,7 +36,7 @@ test('Navigation in Side Bar @smoke', async({page}) => {
     await pm.navigateTo().windowPage()
 })
 
-test('Paramaterized Methods @smoke', async({page}) => {
+test.only('Paramaterized Methods', async({page}) => {
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName()
     const randomEmail = `${randomFullName.replace(' ', '')}${faker.number.int(1000)}@test.com`
