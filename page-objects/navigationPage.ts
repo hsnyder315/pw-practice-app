@@ -86,8 +86,8 @@ export class NavigationPage extends HelperBase {
 
     // eCharts Page
     async eChartsPage (){
-        await this.selectGroupMenuItem('Charts')
-        this.page.getByRole('link', { name: 'Echarts' })
+        await this.page.click('span:has-text("Charts")')
+        await this.page.click('span:has-text("Echarts")')
     }
     
     // Smart Table Page

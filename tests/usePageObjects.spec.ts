@@ -29,14 +29,14 @@ test('Navigation in Side Bar @smoke', async({page}) => {
     await pm.navigateTo().authRequestPasswordPage()
     await pm.navigateTo().authResetPasswordPage()
     await pm.navigateTo().calendarPage()
-    // await pm.navigateTo().eChartsPage() // - need to figure out how to find echarts without running in to the issue of it also having charts in the name
+    await pm.navigateTo().eChartsPage()
     await pm.navigateTo().popoverPage()
     await pm.navigateTo().smartTablePage()
     await pm.navigateTo().treeGridPage()
     await pm.navigateTo().windowPage()
-})
+}) // Completed!!
 
-test.only('Paramaterized Methods', async({page}) => {
+test('Paramaterized Methods', async({page}) => {
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName()
     const randomEmail = `${randomFullName.replace(' ', '')}${faker.number.int(1000)}@test.com`
