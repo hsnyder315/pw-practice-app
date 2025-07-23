@@ -14,27 +14,31 @@ test.beforeEach(async({page}) => {
     await page.goto('/')
 })
 
-test('Navigation in Side Bar @smoke', async({page}) => {
+test('Navigation in Side Bar v2', async({page}) => {
     const pm = new PageManager(page)
-    // To use the new class, we need a new instance of the page object in the test
-    // const navTo = new NavigationPage(page) - commented out for section 6 lesson 51 as it's now being handled in pageManager.ts and the new const above
-    await pm.navigateTo().datepickerPage()
-    await pm.navigateTo().formLayoutsPage()
-    await pm.navigateTo().smartTablePage()
-    await pm.navigateTo().toastrPage()
-    await pm.navigateTo().tooltipPage()
-    await pm.navigateTo().dialogPage()
-    await pm.navigateTo().authLoginPage()
-    await pm.navigateTo().authRegisterPage()
-    await pm.navigateTo().authRequestPasswordPage()
-    await pm.navigateTo().authResetPasswordPage()
-    await pm.navigateTo().calendarPage()
-    await pm.navigateTo().eChartsPage()
-    await pm.navigateTo().popoverPage()
-    await pm.navigateTo().smartTablePage()
-    await pm.navigateTo().treeGridPage()
-    await pm.navigateTo().windowPage()
-}) // Completed!!
+    const navigationMethods = [
+        'datepickerPage',
+        'formLayoutsPage',
+        'smartTablePage',
+        'toastrPage',
+        'dialogPage',
+        'authLoginPage',
+        'authRegisterPage',
+        'authRequestPasswordPage',
+        'authResetPasswordPage',
+        'authResetPasswordPage',
+        'calendarPage',
+        'eChartsPage',
+        'popoverPage',
+        'smartTablePage',
+        'treeGridPage',
+        'windowPage'
+    ]
+    
+    for (const method of navigationMethods) {
+        await pm.navigateTo()[method]()
+    }
+})
 
 test('Paramaterized Methods', async({page}) => {
     const pm = new PageManager(page)
