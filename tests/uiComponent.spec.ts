@@ -177,7 +177,7 @@ test.describe('Smart Table Page', () => {
         await page.locator('.ng2-smart-pagination-nav').getByText('2').click()
         // create a locator for row by ID 11
         const targetRowByID = page.getByRole('row', {name: "11"}).filter({has: page.locator('td').nth(1).getByText('11')})
-        await targetRowByID.locator('.nb-edit').click() //  await targetRowByID.click() alone finds two rows on Page 2 using the text 11. need to add a Filter in the const as seen above
+        await targetRowByID.locator('.nb-edit').click() //  using await targetRowByID.click() alone finds two rows on Page 2 using the text 11. need to add a Filter in the const as seen above
         // now edit the Email field
         await page.locator('input-editor').getByPlaceholder('E-mail').clear()
         await page.locator('input-editor').getByPlaceholder('E-mail').fill('test@test.com')
