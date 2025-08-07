@@ -20,6 +20,24 @@ test.describe('Buttons', () => {
             await device.click({ delay: 600 }); // Turn On
         }
     });
+
+    test('Window Page', async ({ page }) => {
+
+        await page.goto('../pages/modal-overlays/window');
+
+        // Open Window Form
+        await page.locator('button', {hasText: 'Open Window Form'}).click();
+        const modal = page.locator('nb-window');
+        await expect(modal).toBeVisible();
+        const collapseButton = modal.locator('button:has(nb-icon[ng-reflect-icon="collapse-outline"])');
+        await collapseButton.click();
+
+        // Open Window with Template
+        await page.locator('button', {hasText: 'Open Window with Template'}).click();
+        const card = page.locator('nb-window'); // need to find a better way to locate each window as it's opened
+        await expect(card).toBeVisible();
+        await collapseButton.click();
+    })
 })
 
 test.describe('Dropdowns', () => {

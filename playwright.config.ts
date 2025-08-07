@@ -38,7 +38,7 @@ export default defineConfig<TestOptions>({
     baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
         : process.env.STAGING == '1' ? 'http://localhost:4202/'
         : 'http://localhost:4200/',
-
+    viewport: { width:1920, height: 1080 },
     trace: 'on-first-retry',
     screenshot: "only-on-failure",
     actionTimeout: 30000,

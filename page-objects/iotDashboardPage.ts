@@ -6,5 +6,4 @@ export class IoTDashboardPage extends HelperBase {
     constructor(page: Page){
         super(page)
     }
-    
 }
