@@ -36,7 +36,7 @@ test('Navigation in Side Bar v2', async({page}) => {
     ]
     
     for (const method of navigationMethods) {
-        await pm.navigateTo()[method]()
+        await pm.navigateTo()[method]
     }
 })
 
