@@ -4,6 +4,7 @@ import { HelperUI } from '../page-objects/helperBase';
 test.describe('Buttons', () => {
 
     test('IoT Dashboard', async ({ page }) => {
+        
         await page.goto('/');
 
         // On/Off Buttons
@@ -19,6 +20,7 @@ test.describe('Buttons', () => {
             await device.click({ delay: 600 }); // Turn Off
             await device.click({ delay: 600 }); // Turn On
         }
+
     });
 
     test('Window Page', async ({ page }) => {
@@ -37,6 +39,7 @@ test.describe('Buttons', () => {
         const card = page.locator('nb-window'); // need to find a better way to locate each window as it's opened
         await expect(card).toBeVisible();
         await collapseButton.click();
+
     })
 })
 
@@ -77,5 +80,6 @@ test.describe('Dropdowns', () => {
         const toastTypeList = page.locator('nb-option-list nb-option');
         const toastTypeItems = ["primary", "success", "info", "warning", "danger"];
         await HelperUI.selectAndVerifyOptions(toastTypeDropdown, toastTypeList, toastTypeItems);
+
     })
 })
