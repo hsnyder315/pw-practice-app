@@ -27,18 +27,30 @@ test.describe('Buttons', () => {
 
         await page.goto('../pages/modal-overlays/window');
 
-        // Open Window Form
-        await page.locator('button', {hasText: 'Open Window Form'}).click();
-        const modal = page.locator('nb-window');
-        await expect(modal).toBeVisible();
-        const collapseButton = modal.locator('button:has(nb-icon[ng-reflect-icon="collapse-outline"])');
-        await collapseButton.click();
+        // const modals = [];
 
-        // Open Window with Template
+        const modal = page.locator('nb-window');
+        const closeButton = modal.locator('button:has(nb-icon[ng-reflect-icon="close-outline"])');
+
+        // Open & Close Window Form
+        await page.locator('button', {hasText: 'Open Window Form'}).click();
+        await expect(modal).toBeVisible();
+        await closeButton.click({ delay: 600 });
+
+        // Open & Close Window with Template
         await page.locator('button', {hasText: 'Open Window with Template'}).click();
-        const card = page.locator('nb-window'); // need to find a better way to locate each window as it's opened
-        await expect(card).toBeVisible();
-        await collapseButton.click();
+        await expect(modal).toBeVisible();
+        await closeButton.click({ delay: 600 });
+
+        // Open & Close window with backdrop
+        await page.locator('button', {hasText: 'Open window with backdrop'}).click();
+        await expect(modal).toBeVisible();
+        await closeButton.click({ delay: 600 });
+
+        // Open & Close window without backdrop
+        await page.locator('button', {hasText: 'Open window without backdrop'}).click();
+        await expect(modal).toBeVisible();
+        await closeButton.click({ delay: 600 });
 
     })
 })
