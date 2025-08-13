@@ -36,21 +36,25 @@ test.describe('Buttons', () => {
         await page.locator('button', {hasText: 'Open Window Form'}).click();
         await expect(modal).toBeVisible();
         await closeButton.click({ delay: 600 });
+        expect(modal).toBeHidden;
 
         // Open & Close Window with Template
         await page.locator('button', {hasText: 'Open Window with Template'}).click();
         await expect(modal).toBeVisible();
         await closeButton.click({ delay: 600 });
+        expect(modal).toBeHidden;
 
         // Open & Close window with backdrop
         await page.locator('button', {hasText: 'Open window with backdrop'}).click();
         await expect(modal).toBeVisible();
         await closeButton.click({ delay: 600 });
+        expect(modal).toBeHidden;
 
         // Open & Close window without backdrop
         await page.locator('button', {hasText: 'Open window without backdrop'}).click();
         await expect(modal).toBeVisible();
         await closeButton.click({ delay: 600 });
+        expect(modal).toBeHidden;
 
     })
 })
