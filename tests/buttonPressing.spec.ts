@@ -29,8 +29,9 @@ test.describe('Buttons', () => {
 
         // const modals = [];
 
-        const modal = page.locator('nb-window');
+        const modal = page.locator('nb-window').last();
         const closeButton = modal.locator('button:has(nb-icon[ng-reflect-icon="close-outline"])');
+        const collapseButton = modal.locator('button:has(nb-icon[ng-reflect-icon="collapse-outline"])')
 
         // Open & Close Window Form
         await page.locator('button', {hasText: 'Open Window Form'}).click();
@@ -54,6 +55,30 @@ test.describe('Buttons', () => {
         await page.locator('button', {hasText: 'Open window without backdrop'}).click();
         await expect(modal).toBeVisible();
         await closeButton.click({ delay: 600 });
+        expect(modal).toBeHidden();
+
+        // Open & Collapse Window Form
+        await page.locator('button', {hasText: 'Open Window Form'}).click();
+        await expect(modal).toBeVisible();
+        await collapseButton.click({ delay: 600 });
+        expect(modal).toBeHidden();
+
+        // Open & Collapse Window with Template
+        await page.locator('button', {hasText: 'Open Window with Template'}).click();
+        await expect(modal).toBeVisible();
+        await collapseButton.click({ delay: 600 });
+        expect(modal).toBeHidden();
+
+        // Open & Collapse window with backdrop
+        await page.locator('button', {hasText: 'Open window with backdrop'}).click();
+        await expect(modal).toBeVisible();
+        await collapseButton.click({ delay: 600 });
+        expect(modal).toBeHidden();
+
+        // Open & Collapse window without backdrop
+        await page.locator('button', {hasText: 'Open window without backdrop'}).click();
+        await expect(modal).toBeVisible();
+        await collapseButton.click({ delay: 600 });
         expect(modal).toBeHidden();
 
     })
