@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    //"ignoreDeprecations": "6.0",//
     "importHelpers": true,
     "module": "nodenext",
     "outDir": "./dist/out-tsc",
@@ -9,7 +8,7 @@
     "declaration": false,
     "moduleResolution": "nodenext",
     "experimentalDecorators": true,
-    "target": "es2020",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -18,7 +17,10 @@
       "dom"
     ],
     "plugins": [
-      { "name": "tslint-language-service"}
-    ]
+      {
+        "name": "tslint-language-service"
+      }
+    ],
+    "useDefineForClassFields": false
   }
 }
