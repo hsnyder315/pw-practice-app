@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test'
-import { test } from '../test-options'
+import { test } from '../test-options.js'
 
 // Section 5 Lesson 44: Drag and Drop with iFrames
 test('Drag and Drop with iFrames', async({page, globalsQaURL}) => {

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { HelperUI } from '../page-objects/helperBase';
+import { HelperUI } from '../page-objects/helperBase.js';
 
 test.describe('Buttons', () => {
 

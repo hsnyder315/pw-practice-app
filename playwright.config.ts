@@ -1,8 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
-import { TestOptions } from './test-options';
+import { TestOptions } from './test-options.js';
 
 import * as dotenv from 'dotenv';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 // Global Settings

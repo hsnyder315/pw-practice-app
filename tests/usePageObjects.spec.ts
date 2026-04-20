@@ -1,6 +1,6 @@
 // Section 6 Lesson 46 - 52: Page Objects
 import { expect, test } from '@playwright/test'
-import { PageManager } from '../page-objects/pageManager'
+import { PageManager } from '../page-objects/pageManager.js'
 import { faker } from '@faker-js/faker'
 // import { argosScreenshot } from "@argos-ci/playwright"
 
