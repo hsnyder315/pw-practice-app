@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { HelperUI } from '../page-objects/helperBase.js';
+import { HelperUI } from '../page-objects/helperBase.ts';
 
 test.describe('Buttons', () => {
 
@@ -25,7 +25,7 @@ test.describe('Buttons', () => {
 
     test('Window Page', async ({ page }) => {
 
-        await page.goto('../pages/modal-overlays/window');
+        await page.goto('/pages/modal-overlays/window');
 
         // const modals = [];
 
@@ -108,7 +108,7 @@ test.describe('Dropdowns', () => {
     // Toastr Page
     test('Toastr Dropdowns v2', async({page}) => {
 
-        await page.goto('../pages/modal-overlays/toastr')
+        await page.goto('/pages/modal-overlays/toastr')
 
         // Position
         const positionDropdown = page.locator('[class="position-select appearance-outline size-medium status-basic shape-rectangle nb-transition"]');

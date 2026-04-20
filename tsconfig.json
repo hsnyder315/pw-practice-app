@@ -2,11 +2,13 @@
   "compileOnSave": false,
   "compilerOptions": {
     "importHelpers": true,
-    "module": "nodenext",
+    "module": "commonjs",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "experimentalDecorators": true,
     "target": "ES2022",
     "typeRoots": [
