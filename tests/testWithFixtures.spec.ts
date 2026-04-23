@@ -1,5 +1,5 @@
 // Section 8 Lesson 68: Fixtures
-import { test } from '../test-options.js'
+import { test } from '../test-options'
 import { faker } from '@faker-js/faker'
 
 // Nav to Homepage
