@@ -40,7 +40,7 @@ test('Navigation in Side Bar v2', async({page}) => {
     }
 })
 
-test('Paramaterized Methods', async({page}) => {
+test('Parameterized Methods', async({page}) => {
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName()
     const randomEmail = `${randomFullName.replace(' ', '')}${faker.number.int(1000)}@test.com`
